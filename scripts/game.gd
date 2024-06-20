@@ -11,6 +11,8 @@ extends Node2D
 @onready var w_select = $west/w_select
 @onready var map: Map = $Map
 
+@export var map_max_distance = 10;
+
 var game_room: Room;
 
 # Function to generate a branching room map
@@ -36,9 +38,10 @@ func generate_branching_room_map(max_width: int) -> Dictionary:
 		# Randomly decide how many new rooms to create in random directions
 		var num_new_rooms = randi() % (max_width + 1)
 
-		for room in range(num_new_rooms):
+		for dir_index in range(4):
 			# Randomly choose a direction to expand
-			var dir_index = randi() % directions.size()
+			var make_room_chance = randi_range(0,10) <= 5
+			var make_door_chance = randi_range(0,10) <= 2
 			var direction = directions[dir_index]
 
 			# Determine new room position
@@ -53,18 +56,32 @@ func generate_branching_room_map(max_width: int) -> Dictionary:
 				"west":
 					new_pos += Vector2(-1, 0)
 
-			# Check if new position is not yet occupied
-			if not room_map.has(new_pos):
-				var new_type = types[randi() % types.size()]
-				var new_room: Room = Room.new(new_type, new_pos)
-				current_room.doors[direction] = door_types[randi() % door_types.size()]
-				new_room.doors[get_opposite_direction(direction)] = current_room.doors[direction]
-				
-				current_room.rooms[direction] = new_room;
-				new_room.rooms[get_opposite_direction(direction)] = current_room;
-				
-				room_map[new_pos] = new_room
-				queue.append(new_pos)
+			# Check if new position is not yet occupied and within max distance
+			if (not room_map.has(new_pos)) and absf(Vector2(0,0).distance_to(new_pos)) <= max_width:
+				if(make_room_chance):
+					var new_type = types[randi() % types.size()]
+					var new_room: Room = Room.new(new_type, new_pos)
+					current_room.doors[direction] = door_types[randi() % door_types.size()]
+					new_room.doors[get_opposite_direction(direction)] = current_room.doors[direction]
+					map.add_door(current_room, new_room);
+					
+					current_room.rooms[direction] = new_room;
+					new_room.rooms[get_opposite_direction(direction)] = current_room;
+					
+					room_map[new_pos] = new_room
+					queue.append(new_pos)
+				else:
+					room_map[new_pos] = null;
+					current_room.rooms[direction] = null;
+			# If pointing at a space that already has a room, add a chance to build a door between them
+			elif(room_map.has(new_pos) and room_map[new_pos] != null):
+				if(make_door_chance):
+					current_room.doors[direction] = door_types[randi() % door_types.size()]
+					room_map[new_pos].doors[get_opposite_direction(direction)] = current_room.doors[direction]
+					map.add_door(current_room, room_map[new_pos]);
+					
+					current_room.rooms[direction] = room_map[new_pos];
+					room_map[new_pos].rooms[get_opposite_direction(direction)] = current_room;
 
 	return room_map
 
@@ -99,7 +116,7 @@ func _unhandled_input(event):
 		get_tree().reload_current_scene();
 
 func _ready():
-	var room_map = generate_branching_room_map(5);
+	var room_map = generate_branching_room_map(map_max_distance);
 	game_room = room_map[Vector2(0,0)];
 	update_room(game_room);
 	

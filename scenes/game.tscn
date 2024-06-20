@@ -56,10 +56,10 @@ text = "west"
 position = Vector2(7, 14)
 
 [node name="type" type="Label" parent="."]
-offset_left = 549.0
-offset_top = 318.0
-offset_right = 593.0
-offset_bottom = 341.0
+offset_left = 10.0
+offset_top = 43.0
+offset_right = 54.0
+offset_bottom = 66.0
 text = "type
 "
 
@@ -67,5 +67,5 @@ text = "type
 position = Vector2(576, 324)
 
 [node name="Map" parent="." instance=ExtResource("3_gncw3")]
-position = Vector2(256, 184)
-scale = Vector2(2, 2)
+position = Vector2(578, 326)
+scale = Vector2(2.5, 2.5)
