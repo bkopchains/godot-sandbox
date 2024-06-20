@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8ctkqwdwroa8"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_qgnst"]
+[ext_resource type="PackedScene" uid="uid://b0iwm8g4dpdc3" path="res://scenes/ring_select.tscn" id="2_dnvvy"]
+[ext_resource type="PackedScene" uid="uid://cpcmbcpurxixw" path="res://scenes/map/map.tscn" id="3_gncw3"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_qgnst")
+
+[node name="text" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 142.0
+offset_bottom = 31.0
+text = "press R to restart"
+
+[node name="north" type="Label" parent="."]
+offset_left = 560.0
+offset_top = 8.0
+offset_right = 604.0
+offset_bottom = 31.0
+text = "north"
+
+[node name="n_select" parent="north" instance=ExtResource("2_dnvvy")]
+position = Vector2(5, 14)
+
+[node name="south" type="Label" parent="."]
+offset_left = 553.0
+offset_top = 616.0
+offset_right = 598.0
+offset_bottom = 639.0
+text = "south
+"
+
+[node name="s_select" parent="south" instance=ExtResource("2_dnvvy")]
+position = Vector2(4, 13)
+
+[node name="east" type="Label" parent="."]
+offset_left = 1128.0
+offset_top = 320.0
+offset_right = 1172.0
+offset_bottom = 343.0
+text = "east"
+
+[node name="e_select" parent="east" instance=ExtResource("2_dnvvy")]
+position = Vector2(4, 13)
+
+[node name="west" type="Label" parent="."]
+offset_left = 16.0
+offset_top = 320.0
+offset_right = 60.0
+offset_bottom = 343.0
+text = "west"
+
+[node name="w_select" parent="west" instance=ExtResource("2_dnvvy")]
+position = Vector2(7, 14)
+
+[node name="type" type="Label" parent="."]
+offset_left = 549.0
+offset_top = 318.0
+offset_right = 593.0
+offset_bottom = 341.0
+text = "type
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="Map" parent="." instance=ExtResource("3_gncw3")]
+position = Vector2(256, 184)
+scale = Vector2(2, 2)

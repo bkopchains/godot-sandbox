@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp8otwp5nf3iu"]
+
+[ext_resource type="Texture2D" uid="uid://dw2qyoveql5ql" path="res://assets/textures/map_notvisited.png" id="1_fmbd0"]
+
+[node name="Tile" type="Sprite2D"]
+texture = ExtResource("1_fmbd0")
