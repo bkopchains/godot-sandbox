@@ -4,6 +4,10 @@ extends Node2D
 @onready var east_label = $east
 @onready var west_label = $west
 @onready var type_label = $type
+@onready var door_north: Door = $"Door North"
+@onready var door_south: Door = $"Door South"
+@onready var door_east: Door = $"Door East"
+@onready var door_west: Door = $"Door West"
 
 @onready var n_select = $north/n_select
 @onready var s_select = $south/s_select
@@ -124,8 +128,12 @@ func update_room(room: Room):
 	map.visit_room(room);
 	
 	north_label.text = room.doors["north"] if room.doors["north"] != null else "";
+	door_north.update_type(room.doors["north"]);
 	south_label.text = room.doors["south"] if room.doors["south"] != null else "";
+	door_south.update_type(room.doors["south"]);
 	east_label.text = room.doors["east"] if room.doors["east"] != null else "";
+	door_east.update_type(room.doors["east"]);
 	west_label.text = room.doors["west"] if room.doors["west"] != null else "";
+	door_west.update_type(room.doors["west"]);
 	type_label.text = room.type;
 	

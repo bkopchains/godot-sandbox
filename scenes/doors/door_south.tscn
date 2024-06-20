@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr5v7432cpayl"]
+
+[ext_resource type="Texture2D" uid="uid://vj5wp3xxig1f" path="res://assets/textures/doors_s.png" id="1_pk4l6"]
+[ext_resource type="Script" path="res://scenes/doors/door.gd" id="2_xkdvr"]
+
+[node name="Door South" type="Sprite2D"]
+texture = ExtResource("1_pk4l6")
+offset = Vector2(0, -22)
+hframes = 5
+region_rect = Rect2(0, 0, 4608, 54)
+script = ExtResource("2_xkdvr")

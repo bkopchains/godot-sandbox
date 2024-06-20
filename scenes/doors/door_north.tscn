@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://70fdgfgw17qk"]
+
+[ext_resource type="Texture2D" uid="uid://pg7j5refhr1o" path="res://assets/textures/doors_n.png" id="1_6hxy2"]
+[ext_resource type="Script" path="res://scenes/doors/door.gd" id="2_w12c6"]
+
+[node name="Door North" type="Sprite2D"]
+position = Vector2(0, -1)
+texture = ExtResource("1_6hxy2")
+offset = Vector2(0, 25.5)
+hframes = 5
+region_rect = Rect2(0, 0, 4608, 54)
+script = ExtResource("2_w12c6")

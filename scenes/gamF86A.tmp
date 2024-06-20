@@ -11,6 +11,13 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qgnst")
 
+[node name="text" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 142.0
+offset_bottom = 31.0
+text = "press R to restart"
+
 [node name="Door East" parent="." instance=ExtResource("4_smgey")]
 position = Vector2(1152, 320)
 
@@ -22,13 +29,6 @@ position = Vector2(576, 648)
 
 [node name="Door West" parent="." instance=ExtResource("5_yvhba")]
 position = Vector2(0, 320)
-
-[node name="text" type="Label" parent="."]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 142.0
-offset_bottom = 31.0
-text = "press R to restart"
 
 [node name="north" type="Label" parent="."]
 offset_left = 560.0
